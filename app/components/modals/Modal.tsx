@@ -1,5 +1,4 @@
 "use client";
-
 import { useCallback, useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import Button from "../Button";
@@ -35,34 +34,34 @@ const Modal: React.FC<ModalProps> = ({
     setShowModal(isOpen);
   }, [isOpen]);
 
+  // Handle closing the modal
   const handleClose = useCallback(() => {
     if (disabled) {
       return;
     }
-
     setShowModal(false);
-
     setTimeout(() => {
       onClose();
     }, 300);
   }, [disabled, onClose]);
 
+  // Handle submitting the modal
   const handleSubmit = useCallback(() => {
     if (disabled) {
       return;
     }
-
     onSubmit();
   }, [disabled, onSubmit]);
 
+  // Handle secondary action (e.g. going back in a multi-step process)
   const handleSecondaryAction = useCallback(() => {
     if (disabled || !secondaryAction) {
       return;
     }
-
     secondaryAction();
   }, [disabled, secondaryAction]);
 
+  // If modal is not open, do not render anything
   if (!isOpen) {
     return null;
   }
@@ -73,9 +72,11 @@ const Modal: React.FC<ModalProps> = ({
         <div className="relative w-full md:w-4/6 lg:w-3/6 xl:w-2/5 my-6 mx-auto h-full lg:h-auto md:h-auto">
           {/* CONTENT */}
           <div
-            className={`translate duration-300 h-full 
-            ${showModal ? "translate-y-0" : "translate-y-full"} 
-            ${showModal ? "opacity-100" : "opacity-0"}`}
+            className={`translate duration-300 h-full ${
+              showModal
+                ? "translate-y-0 opacity-100"
+                : "translate-y-full opacity-0"
+            }`}
           >
             <div className="translate h-full lg:h-auto md:h-auto border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
               {/* HEADER */}

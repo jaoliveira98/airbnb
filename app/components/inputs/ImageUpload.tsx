@@ -1,5 +1,3 @@
-"use client";
-
 import { CldUploadWidget } from "next-cloudinary";
 import Image from "next/image";
 import { useCallback } from "react";
@@ -17,13 +15,16 @@ interface ImageUploadProps {
 }
 
 const ImageUpload: React.FC<ImageUploadProps> = ({ onChange, value }) => {
+  // Handle the Cloudinary upload
   const handleUpload = useCallback(
     (result: any) => {
+      // When the upload is complete, call the onChange prop with the secure URL of the uploaded image
       onChange(result.info.secure_url);
     },
     [onChange]
   );
 
+  // Render the Cloudinary upload widget
   return (
     <CldUploadWidget
       onUpload={handleUpload}
@@ -32,6 +33,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onChange, value }) => {
         maxFiles: 1,
       }}
     >
+      {/* Render the upload button */}
       {({ open }) => {
         return (
           <div
