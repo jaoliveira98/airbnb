@@ -7,34 +7,36 @@ import ToasterProvider from "./providers/ToasterProvider";
 import LoginModal from "./components/modals/LoginModal";
 import getCurrentUser from "./actions/getCurrentUser";
 import RentModal from "./components/modals/RentModal";
+import SearchModal from "./components/modals/SearchModal";
 
 const font = Nunito({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Airbnb Clone",
-  description: "React, Tailwind, Prisma, MongoDB, NextAuth",
+	title: "Airbnb Clone",
+	description: "React, Tailwind, Prisma, MongoDB, NextAuth",
 };
 
 export default async function RootLayout({
-  children,
+	children,
 }: {
-  children: React.ReactNode;
+	children: React.ReactNode;
 }) {
-  const currentUser = await getCurrentUser();
+	const currentUser = await getCurrentUser();
 
-  return (
-    <html lang="en">
-      <body className={font.className}>
-        <ClientOnly>
-          <ToasterProvider />
-          <RentModal />
-          <LoginModal />
-          <RegisterModal />
-          <Navbar currentUser={currentUser} />
-        </ClientOnly>
-        <div className="pb-20 pt-28"></div>
-        {children}
-      </body>
-    </html>
-  );
+	return (
+		<html lang="en">
+			<body className={font.className}>
+				<ClientOnly>
+					<ToasterProvider />
+					<RentModal />
+					<SearchModal />
+					<LoginModal />
+					<RegisterModal />
+					<Navbar currentUser={currentUser} />
+				</ClientOnly>
+				<div className="pb-20 pt-28"></div>
+				{children}
+			</body>
+		</html>
+	);
 }
